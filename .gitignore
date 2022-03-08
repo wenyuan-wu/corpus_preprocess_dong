@@ -2,4 +2,5 @@ venv/
 .idea/
 json_data/
 output_data/
+meta_data/
 
