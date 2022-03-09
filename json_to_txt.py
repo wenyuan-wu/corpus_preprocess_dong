@@ -33,8 +33,11 @@ def prepare_data(json_folder_name, pmc_date_df, output_folder_name, date_form):
     :param date_form: format of date for output file names
     :return: None
     """
+    if not os.path.exists(output_folder_name):
+        os.makedirs(output_folder_name)
     logging.info("loading json files from the folder {}".format(json_folder_name))
     process_bar = tqdm(os.listdir(json_folder_name))
+    counter = 0
     for file_name in process_bar:
         process_bar.set_description("Processing {}".format(file_name))
         file_path = os.path.join(json_folder_name, file_name)
@@ -50,6 +53,8 @@ def prepare_data(json_folder_name, pmc_date_df, output_folder_name, date_form):
         out_file_path = os.path.join(output_folder_name, out_file_name)
         with open(out_file_path, 'w') as out_file:
             out_file.write("\n".join(text_list))
+        counter += 1
+    logging.info("{} files successfully processed in {}".format(counter, output_folder_name))
 
 
 def main():
