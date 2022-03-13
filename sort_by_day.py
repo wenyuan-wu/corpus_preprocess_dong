@@ -2,6 +2,7 @@ import os
 from tqdm import tqdm
 import datetime
 
+
 def sort_by_day(file_folder, days):
     process_bar = tqdm(os.listdir(file_folder))
     counter = 0
@@ -19,7 +20,8 @@ def sort_by_day(file_folder, days):
 def main():
     file_folder = "output_data"
     days = 10
-    sort_by_day(file_folder,days)
+    sort_by_day(file_folder, days)
+
 
 if __name__ == '__main__':
     main()
