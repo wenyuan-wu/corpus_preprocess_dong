@@ -1,5 +1,6 @@
 from datetime import datetime
 import locale
+import pandas as pd
 
 print(locale.getlocale())
 
