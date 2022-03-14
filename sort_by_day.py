@@ -38,6 +38,7 @@ def get_date_df(file_folder, days):
         df = df.sort_index()
     t = df.groupby(pd.Grouper(key="date", axis=0, freq=days, sort=True))['file_name'].apply(list).reset_index(
         name='file_name_list')
+    t.to_csv("sorted_df.csv")
     return t
 
 
