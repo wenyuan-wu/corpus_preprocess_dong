@@ -54,3 +54,5 @@ print(df)
 t = df.groupby(pd.Grouper(key="Dates", axis=0, freq="10D", sort=True))['fil_names'].apply(list).reset_index(name='new')
 print(t)
 
+
+
