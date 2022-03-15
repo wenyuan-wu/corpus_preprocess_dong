@@ -53,11 +53,11 @@ def creat_data(sorted_df, output_folder, file_folder):
                 text_str = []
                 for file_name in file_name_list:
                     file_path = os.path.join(file_folder, file_name)
-                    with open(file_path, 'r') as infile:
+                    with open(file_path, 'r', encoding='utf-8') as infile:
                         for line in infile:
                             text_str.append(line)
                 out_file_path = os.path.join(output_folder, f"{date}.txt")
-                with open(out_file_path, 'w') as out_file:
+                with open(out_file_path, 'w', encoding='utf-8') as out_file:
                     out_file.write("".join(text_str))
 
 
