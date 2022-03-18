@@ -4,5 +4,8 @@ json_data/
 output_data/
 meta_data/
 data_by_10D/
+term_data/
+freq_data/
+term_freq_data/
 
 sorted_df.csv
