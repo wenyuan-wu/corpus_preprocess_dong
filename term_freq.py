@@ -8,19 +8,51 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                     # datefmt='%d-%b-%y %H:%M:%S'
                     )
 
-def get_keywords_list(keyword_folder):
+def get_keywords_list(keyword_folder, keyword_file):
+    file_path = os.path.join(keyword_folder, keyword_file)
     keyword_list = []
-    
+    with open(file_path, 'r', encoding='utf-8') as infile:
+        for line in infile:
+            line = line.rstrip('\n')
+            keyword_list.append(line)
+    return keyword_list
+
+
+def get_freq_data_list(input_folder):
+    process_bar = tqdm(os.listdir(input_folder))
+    df_list = []
+    for file_name in process_bar:
+        process_bar.set_description("Processing {}".format(file_name))
+        file_path = os.path.join(input_folder, file_name)
+        df = pd.read_excel(file_path, skiprows=4)
+        df_list.append(df)
+    return df_list
+
+
+def search_item_in_df(keyword, df):
+    result_df = df.loc[df["Item"].find(keyword) != -1]
+    return result_df
+
+def creat_term_freq_df(keyword_list, df_list):
+    for df in df_list:
+        for item in keyword_list:
+            search_item_in_df(item, df)
 
 
 def main():
     # adjust the following variable values to get the desired output
-    file_folder = "output_data"
-    days = "10D"
-    output_folder = "data_by_10D"
-    sorted_df = get_date_df(file_folder, days)
-    creat_data(sorted_df, output_folder, file_folder)
+    # keywords should not start with kapital
+    keyword_folder = "term_data"
+    keyword_file = "keyword.txt"
+    output_folder = "term_freq_data"
+    input_folder = "freq_data"
 
+
+    keyword_list = get_keywords_list(keyword_folder, keyword_file)
+    print(keyword_list)
+    df_list = get_freq_data_list(input_folder)
+    print(df_list)
+    creat_term_freq_df(keyword_list, df_list)
 
 if __name__ == '__main__':
     main()
