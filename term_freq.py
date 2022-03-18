@@ -30,13 +30,23 @@ def get_freq_data_list(input_folder):
 
 
 def search_item_in_df(keyword, df):
-    result_df = df.loc[df["Item"].find(keyword) != -1]
+    result_df = df.loc[df['Item'].str.contains(keyword, case=False)]
     return result_df
 
-def creat_term_freq_df(keyword_list, df_list):
-    for df in df_list:
+
+def creat_term_freq_df(keyword_list, df_list, input_folder, output_folder):
+    file_names = os.listdir(input_folder)
+    process_bar = tqdm(enumerate(df_list))
+    for idx, df in process_bar:
+        process_bar.set_description("Processing {}".format(file_names[idx]))
+        result_list = []
         for item in keyword_list:
-            search_item_in_df(item, df)
+            result_df = search_item_in_df(item, df)
+            result_list.append(result_df)
+        freq_df = pd.concat(result_list)
+        outfile_path = os.path.join(output_folder, file_names[idx])
+        freq_df.to_excel(outfile_path)
+
 
 
 def main():
@@ -47,12 +57,10 @@ def main():
     output_folder = "term_freq_data"
     input_folder = "freq_data"
 
-
     keyword_list = get_keywords_list(keyword_folder, keyword_file)
-    print(keyword_list)
     df_list = get_freq_data_list(input_folder)
-    print(df_list)
-    creat_term_freq_df(keyword_list, df_list)
+    creat_term_freq_df(keyword_list, df_list, input_folder, output_folder)
+
 
 if __name__ == '__main__':
     main()
