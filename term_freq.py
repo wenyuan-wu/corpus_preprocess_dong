@@ -8,6 +8,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                     # datefmt='%d-%b-%y %H:%M:%S'
                     )
 
+
 def get_keywords_list(keyword_folder, keyword_file):
     file_path = os.path.join(keyword_folder, keyword_file)
     keyword_list = []
@@ -46,7 +47,6 @@ def creat_term_freq_df(keyword_list, df_list, input_folder, output_folder):
         freq_df = pd.concat(result_list)
         outfile_path = os.path.join(output_folder, file_names[idx])
         freq_df.to_excel(outfile_path)
-
 
 
 def main():

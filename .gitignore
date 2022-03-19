@@ -7,5 +7,7 @@ data_by_10D/
 term_data/
 freq_data/
 term_freq_data/
+term_freq_sum/
+freq_data_type/
 
 sorted_df.csv
