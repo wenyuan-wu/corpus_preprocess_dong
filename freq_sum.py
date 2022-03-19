@@ -21,12 +21,8 @@ def get_sum_freq(input_folder, output_folder):
         type_list = df['Type'].unique()
         df_dict[f"{date}"] = {}
         for t in type_list:
-            # print(t)
-            # print(df.loc[df["Type"] == t])
             raw = df.loc[df["Type"] == t]["Relative frequency (focus)"].sum()
-            # print(raw)
             norm = df.loc[df["Type"] == t]["Score"].sum()
-            # print(norm)
             df_dict[f"{date}"][f"type {t} raw"] = raw
             df_dict[f"{date}"][f"type {t} norm"] = norm
     sum_df = pd.DataFrame.from_dict(df_dict, orient='index')
