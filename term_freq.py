@@ -31,7 +31,7 @@ def get_freq_data_list(input_folder):
 
 
 def search_item_in_df(keyword, df):
-    result_df = df.loc[df['Item'].str.contains(keyword, case=False)]
+    result_df = df.loc[df['Item'].str.contains(keyword, case=False, na=False)]
     return result_df
 
 

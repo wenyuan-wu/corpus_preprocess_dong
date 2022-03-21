@@ -9,5 +9,7 @@ freq_data/
 term_freq_data/
 term_freq_sum/
 freq_data_type/
+__pycache__/
+summary_data/
 
 sorted_df.csv
