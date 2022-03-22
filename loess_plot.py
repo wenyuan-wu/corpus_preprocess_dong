@@ -122,7 +122,7 @@ def plot_data(sum_df, input_folder):
 
 
 def plot_loess(x_labels, y_val, input_folder, plot_name):
-    x_val = np.array(list(range(60)))
+    x_val = np.array(list(range(len(x_labels))))
     loess = Loess(x_val, y_val)
     y_list = []
 
@@ -138,6 +138,9 @@ def plot_loess(x_labels, y_val, input_folder, plot_name):
     file_path = os.path.join(input_folder, f"{plot_name}.png")
     plt.savefig(file_path)
     logging.info(f"figure saved in {file_path}")
+    file_path = os.path.join(input_folder, f"{plot_name}.xlsx")
+    out_df = pd.DataFrame(y_arr)
+    out_df.to_excel(file_path)
 
 
 def main():
