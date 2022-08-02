@@ -11,5 +11,8 @@ term_freq_sum/
 freq_data_type/
 __pycache__/
 summary_data/
+input/
+output/
 
+README.txt
 sorted_df.csv

@@ -16,3 +16,13 @@ json_folder_name = "json_data"
 output_folder_name = "output_data"
 date_form = "%Y-%m-%d"
 ```
+
+## Verb Frequency
+
+Install the latest version of spacy
+
+```commandline
+pip install -U pip setuptools wheel
+pip install -U spacy
+python -m spacy download en_core_web_trf
+```
