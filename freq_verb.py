@@ -33,7 +33,7 @@ def get_freq(nlp, file_path):
 def create_freq_data(input_folder, output_folder):
     # Uncomment to enable GPU acceleration
     # spacy.prefer_gpu()
-    nlp = spacy.load("en_core_web_trf")
+    nlp = spacy.load("en_core_web_sm")
     for file_name in os.listdir(input_folder):
         file_path = os.path.join(input_folder, file_name)
         logging.info(f"Processing {file_path}...")
