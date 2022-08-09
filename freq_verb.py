@@ -24,10 +24,11 @@ def get_freq(nlp, file_path):
                      token.pos_ == "VERB")]
         verb_list += verbs
         total_word += len(doc)
+    total_verb = len(verb_list)
     verb_freq = Counter(verb_list)
     top_110 = verb_freq.most_common(110)
     text_file.close()
-    return top_110, total_word
+    return top_110, total_word, total_verb
 
 
 def create_freq_data(input_folder, output_folder):
@@ -37,11 +38,12 @@ def create_freq_data(input_folder, output_folder):
     for file_name in os.listdir(input_folder):
         file_path = os.path.join(input_folder, file_name)
         logging.info(f"Processing {file_path}...")
-        top_list, total_word = get_freq(nlp, file_path)
+        top_list, total_word, total_verb = get_freq(nlp, file_path)
         out_path = os.path.join(output_folder, f"{file_name[:-4]}.tsv")
         with open(out_path, 'w', encoding='utf-8') as out_file:
             for line in top_list:
                 line = [str(i) for i in line]
+                line += [str(total_verb)]
                 line += [str(total_word)]
                 out_file.write("\t".join(line))
                 out_file.write("\n")
